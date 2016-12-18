@@ -3,7 +3,7 @@ package Geo::Coder::GooglePlaces;
 use strict;
 use warnings;
 use Geo::Coder::GooglePlaces::V3;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new {
     my ($self, %param) = @_;
