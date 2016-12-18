@@ -185,7 +185,7 @@ Geo::Coder::GooglePlaces::V3 - Google Maps Geocoding API V3
 
   use Geo::Coder::GooglePlaces;
 
-  my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3);
+  my $geocoder = Geo::Coder::GooglePlaces->new();
   my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
 
 =head1 DESCRIPTION
@@ -198,10 +198,10 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Map
 
 =item new
 
-  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3);
-  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, language => 'ru');
-  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, gl => 'ca');
-  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'latin1');
+  $geocoder = Geo::Coder::GooglePlaces->new();
+  $geocoder = Geo::Coder::GooglePlaces->new(language => 'ru');
+  $geocoder = Geo::Coder::GooglePlaces->new(gl => 'ca');
+  $geocoder = Geo::Coder::GooglePlaces->new(oe => 'latin1');
 
 To specify the language of Google's response add C<language> parameter
 with a two-letter value. Note that adding that parameter does not
