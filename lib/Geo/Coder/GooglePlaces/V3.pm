@@ -1,8 +1,8 @@
-package Geo::Coder::Google::V3;
+package Geo::Coder::GooglePlaces::V3;
 
 use strict;
 use warnings;
-our $VERSION = '0.17';
+our $VERSION = '0.01';
 
 use Carp;
 use Encode;
@@ -76,9 +76,11 @@ sub geocode {
         $location = Encode::encode_utf8($location);
     }
 
-    my $loc_param = $param{reverse} ? 'latlng' : 'address';
+    my $loc_param = $param{reverse} ? 'latlng' : 'query';
 
-    my $uri = URI->new("https://$self->{host}/maps/api/geocode/json");
+    # FIXME: change to https://maps.googleapis.com/maps/api/place/textsearch/json?query=wisdom%20hospice%20high%20bank%20rochester%20kent%20england&key=YOUR_KEY_GOES_HERE
+    # from https://maps.googleapis.com/maps/api/geocode/json?address=Wisdom+Hospice+High+Bank+Rochester+Kent+England&key=YOUR_KEY_GOES_HERE
+    my $uri = URI->new("https://$self->{host}/maps/api/place/textsearch/json");
     my %query_parameters = ($loc_param => $location);
     $query_parameters{language} = $self->{language} if defined $self->{language};
     $query_parameters{region} = $self->{region} if defined $self->{region};
@@ -86,7 +88,7 @@ sub geocode {
     $query_parameters{sensor} = $self->{sensor} ? 'true' : 'false';
     my $components_params = $self->_get_components_query_params;
     $query_parameters{components} = $components_params if defined $components_params;
-    $query_parameters{key} = $self->{key} if defined $self->{key};
+    $query_parameters{key} = $self->{key} if(defined($self->{key}) && (length $self->{key}));
     $uri->query_form(%query_parameters);
     my $url = $uri->as_string;
 

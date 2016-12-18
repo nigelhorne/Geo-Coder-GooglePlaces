@@ -1,10 +1,10 @@
 use ExtUtils::MakeMaker;
 WriteMakefile(
-    'NAME'      => 'Geo::Coder::Google',
+    'NAME'      => 'Geo::Coder::GooglePlaces',
     'AUTHOR'    => 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>',
     'LICENSE' => 'perl',
-    'VERSION_FROM' => 'lib/Geo/Coder/Google.pm', # finds $VERSION
-    'ABSTRACT_FROM' => 'lib/Geo/Coder/Google.pm',
+    'VERSION_FROM' => 'lib/Geo/Coder/GooglePlaces.pm', # finds $VERSION
+    'ABSTRACT_FROM' => 'lib/Geo/Coder/GooglePlaces.pm',
     'MIN_PERL_VERSION' => '5.008001',
     'PREREQ_PM' => {
         LWP => 5.5,
