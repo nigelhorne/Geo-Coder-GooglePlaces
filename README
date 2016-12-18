@@ -1,20 +1,20 @@
 NAME
-    Geo::Coder::Google - Google Maps Geocoding API
+    Geo::Coder::GooglePlaces - Google Maps Geocoding API
 
 SYNOPSIS
-      use Geo::Coder::Google;
+      use Geo::Coder::GooglePlaces;
 
-      my $geocoder = Geo::Coder::Google->new(apikey => 'Your API Key');
+      my $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key');
       my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
 
 DESCRIPTION
-    Geo::Coder::Google provides a geocoding functionality using Google Maps
+    Geo::Coder::GooglePlaces provides a geocoding functionality using Google Maps
     API.
 
 METHODS
     new
-          $geocoder = Geo::Coder::Google->new(apikey => 'Your API Key');
-          $geocoder = Geo::Coder::Google->new(apikey => 'Your API Key', host => 'maps.google.co.jp');
+          $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key');
+          $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key', host => 'maps.google.co.jp');
 
         Creates a new geocoding object. You should pass a valid Google Maps
         API Key as "apikey" parameter.
@@ -70,7 +70,9 @@ METHODS
           }
 
 AUTHOR
-    Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+    Nigel Horne <njh@bandsman.co.uk>
+
+    Based on Geo::Coder::Google by Tatsuhiko Miyagawa <miyagawa@bulknews.net>
 
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

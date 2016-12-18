@@ -78,8 +78,6 @@ sub geocode {
 
     my $loc_param = $param{reverse} ? 'latlng' : 'query';
 
-    # FIXME: change to https://maps.googleapis.com/maps/api/place/textsearch/json?query=wisdom%20hospice%20high%20bank%20rochester%20kent%20england&key=YOUR_KEY_GOES_HERE
-    # from https://maps.googleapis.com/maps/api/geocode/json?address=Wisdom+Hospice+High+Bank+Rochester+Kent+England&key=YOUR_KEY_GOES_HERE
     my $uri = URI->new("https://$self->{host}/maps/api/place/textsearch/json");
     my %query_parameters = ($loc_param => $location);
     $query_parameters{language} = $self->{language} if defined $self->{language};
@@ -181,18 +179,18 @@ __END__
 
 =head1 NAME
 
-Geo::Coder::Google::V3 - Google Maps Geocoding API V3
+Geo::Coder::GooglePlaces::V3 - Google Maps Geocoding API V3
 
 =head1 SYNOPSIS
 
-  use Geo::Coder::Google;
+  use Geo::Coder::GooglePlaces;
 
-  my $geocoder = Geo::Coder::Google->new(apiver => 3);
+  my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3);
   my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
 
 =head1 DESCRIPTION
 
-Geo::Coder::Google::V3 provides a geocoding functionality using Google Maps API V3.
+Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Maps API V3.
 
 =head1 METHODS
 
@@ -200,10 +198,10 @@ Geo::Coder::Google::V3 provides a geocoding functionality using Google Maps API 
 
 =item new
 
-  $geocoder = Geo::Coder::Google->new(apiver => 3);
-  $geocoder = Geo::Coder::Google->new(apiver => 3, language => 'ru');
-  $geocoder = Geo::Coder::Google->new(apiver => 3, gl => 'ca');
-  $geocoder = Geo::Coder::Google->new(apiver => 3, oe => 'latin1');
+  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3);
+  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, language => 'ru');
+  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, gl => 'ca');
+  $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'latin1');
 
 To specify the language of Google's response add C<language> parameter
 with a two-letter value. Note that adding that parameter does not
@@ -258,7 +256,9 @@ You can also set your own User-Agent object:
 
 =head1 AUTHOR
 
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+Nigel Horne <njh@bandsman.co.uk>
+
+Based on L<Geo::Coder::Google> by Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

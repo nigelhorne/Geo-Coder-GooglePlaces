@@ -1,7 +1,9 @@
 use ExtUtils::MakeMaker;
+
 WriteMakefile(
     'NAME'      => 'Geo::Coder::GooglePlaces',
-    'AUTHOR'    => 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>',
+    # 'AUTHOR'    => 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>',
+    'AUTHOR'    => 'Nigel Horne <njh@bandsman.co.uk>',
     'LICENSE' => 'perl',
     'VERSION_FROM' => 'lib/Geo/Coder/GooglePlaces.pm', # finds $VERSION
     'ABSTRACT_FROM' => 'lib/Geo/Coder/GooglePlaces.pm',
@@ -13,6 +15,10 @@ WriteMakefile(
         URI => 0,
         'HTTP::Request' => 0,
     },
+    BUILD_REQUIRES => {
+	'Test::Most' => 0,
+	'Test::NoWarnings' => 0,
+    },
     'TEST_REQUIRES' => {
         'Test::More' => 0.32,
         'Test::Number::Delta' => 0,
@@ -23,13 +29,13 @@ WriteMakefile(
         'meta-spec' => { version => 2 },
         resources => {
             bugtracker  => {
-                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Geo-Coder-Google',
-                mailto => 'bug-Geo-Coder-Google@rt.cpan.org',
+                web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Geo-Coder-GooglePlaces',
+                mailto => 'bug-Geo-Coder-GooglePlaces@rt.cpan.org',
             },
             repository  => {
                 type => 'git',
-                url => 'https://github.com/arcanez/geo-coder-google.git',
-                web => 'https://github.com/arcanez/geo-coder-google',
+		url => 'https://github.com/nigelhorne/geo-coder-googleplaces.git',
+		web => 'https://github.com/nigelhorne/geo-coder-googleplaces',
             },
         },
     },
