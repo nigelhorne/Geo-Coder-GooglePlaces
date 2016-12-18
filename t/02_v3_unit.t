@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-use Geo::Coder::Google;
+use Geo::Coder::GooglePlaces;
 
 plan tests => 7;
 
