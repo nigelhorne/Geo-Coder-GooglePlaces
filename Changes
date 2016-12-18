@@ -1,4 +1,7 @@
 Revision history for CGI-Info
 
+0.02
+	Added Travis support
+
 0.01	Sun 18 Dec 12:47:53 EST 2016
 	First draft
