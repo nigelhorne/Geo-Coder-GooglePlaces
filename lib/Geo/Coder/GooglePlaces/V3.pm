@@ -96,7 +96,7 @@ sub geocode {
         $query_parameters{client} = $self->{client};
         $uri->query_form(%query_parameters);
 
-        my $signature = $self->make_signature($uri);
+        my $signature = $self->_make_signature($uri);
         # signature must be last parameter in query string or you get 403's
         $url = $uri->as_string;
         $url .= '&signature='.$signature if $signature;
@@ -121,7 +121,7 @@ sub geocode {
 
 # methods below adapted from 
 # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.pl
-sub decode_urlsafe_base64 {
+sub _decode_urlsafe_base64 {
   my ($self, $content) = @_;
 
   $content =~ tr/-/\+/;
@@ -130,7 +130,7 @@ sub decode_urlsafe_base64 {
   return MIME::Base64::decode_base64($content);
 }
 
-sub encode_urlsafe{
+sub _encode_urlsafe{
   my ($self, $content) = @_;
   $content =~ tr/\+/\-/;
   $content =~ tr/\//\_/;
@@ -138,20 +138,20 @@ sub encode_urlsafe{
   return $content;
 }
 
-sub make_signature {
+sub _make_signature {
   my ($self, $uri) = @_;
 
   require Digest::HMAC_SHA1;
   require MIME::Base64;
 
-  my $key = $self->decode_urlsafe_base64($self->{key});
+  my $key = $self->_decode_urlsafe_base64($self->{key});
   my $to_sign = $uri->path_query;
 
   my $digest = Digest::HMAC_SHA1->new($key);
   $digest->add($to_sign);
   my $signature = $digest->b64digest;
 
-  return $self->encode_urlsafe($signature);
+  return $self->_encode_urlsafe($signature);
 }
 
 # Google API wants the components formatted in the following way:
