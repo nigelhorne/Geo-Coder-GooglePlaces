@@ -20,7 +20,7 @@ WriteMakefile(
 	'Test::NoWarnings' => 0,
     },
     'TEST_REQUIRES' => {
-        'Test::More' => 0.32,
+        'Test::Most' => 0,
         'Test::Number::Delta' => 0,
         'Digest::HMAC_SHA1' => 0,
         'MIME::Base64' => 0,
@@ -39,4 +39,6 @@ WriteMakefile(
             },
         },
     },
+    dist		=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean		=> { FILES => 'Geo-Coder-GooglePlaces-*' },
 );
