@@ -1,83 +1,38 @@
-NAME
-    Geo::Coder::GooglePlaces - Google Maps Geocoding API
+Geo-Coder-GooglePlaces Version 0.02
 
-SYNOPSIS
-      use Geo::Coder::GooglePlaces;
+INSTALLATION
 
-      my $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key');
-      my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
+To install this module, run the following commands:
 
-DESCRIPTION
-    Geo::Coder::GooglePlaces provides a geocoding functionality using Google Maps
-    API.
+	perl Makefile.PL
+	make
+	make test
+	make install
 
-METHODS
-    new
-          $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key');
-          $geocoder = Geo::Coder::GooglePlaces->new(apikey => 'Your API Key', host => 'maps.google.co.jp');
+SUPPORT AND DOCUMENTATION
 
-        Creates a new geocoding object. You should pass a valid Google Maps
-        API Key as "apikey" parameter.
+After installing, you can find documentation for this module with the
+perldoc command.
 
-        When you'd like to query Japanese address, you might want to set
-        *host* parameter, which should point to *maps.google.co.jp*. I think
-        this also applies to other countries like UK (maps.google.co.uk),
-        but so far I only tested with *.com* and *.co.jp*.
+    perldoc Geo::Coder::GooglePlaces
 
-    geocode
-          $location = $geocoder->geocode(location => $location);
-          @location = $geocoder->geocode(location => $location);
+You can also look for information at:
 
-        Queries *$location* to Google Maps geocoding API and returns hash
-        refernece returned back from API server. When you cann the method in
-        an array context, it returns all the candidates got back, while it
-        returns the 1st one in a scalar context.
+    RT, CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Geo-Coder-GooglePlaces
 
-        When you'd like to pass non-ascii string as a location, you should
-        pass it as either UTF-8 bytes or Unicode flagged string.
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/Geo-Coder-GooglePlaces
 
-        Returned data structure is as follows:
+    CPAN Ratings
+        http://cpanratings.perl.org/d/Geo-Coder-GooglePlaces
 
-          {
-            'AddressDetails' => {
-              'Country' => {
-                'AdministrativeArea' => {
-                  'SubAdministrativeArea' => {
-                    'SubAdministrativeAreaName' => 'San Francisco',
-                    'Locality' => {
-                      'PostalCode' => {
-                        'PostalCodeNumber' => '94107'
-                      },
-                      'LocalityName' => 'San Francisco',
-                      'Thoroughfare' => {
-                        'ThoroughfareName' => '548 4th St'
-                      }
-                    }
-                  },
-                  'AdministrativeAreaName' => 'CA'
-                },
-                'CountryNameCode' => 'US'
-              }
-            },
-            'address' => '548 4th St, San Francisco, CA 94107, USA',
-            'Point' => {
-              'coordinates' => [
-                '-122.397323',
-                '37.778993',
-                0
-              ]
-            }
-          }
+    Search CPAN
+        http://search.cpan.org/dist/Geo-Coder-GooglePlaces/
 
-AUTHOR
-    Nigel Horne <njh@bandsman.co.uk>
 
-    Based on Geo::Coder::Google by Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+LICENSE AND COPYRIGHT
 
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+Copyright (C) 2010-2016 Nigel Horne
 
-SEE ALSO
-    Geo::Coder::Yahoo,
-    <http://www.google.com/apis/maps/documentation/#Geocoding_Examples>
-
+This program is released under the following licence: GPL

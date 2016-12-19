@@ -1,17 +1,17 @@
-# Geo::Coder::GooglePlaces
+# Geo::Coder::GooglePlaces::V3
 
-Google Places Geocoding API V3
+Google Maps Geocoding API V3
 
 # SYNOPSIS
 
     use Geo::Coder::GooglePlaces;
 
-    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3);
+    my $geocoder = Geo::Coder::GooglePlaces->new();
     my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
 
 # DESCRIPTION
 
-Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using GooglePlaces API V3.
+Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Maps API V3.
 
 # METHODS
 
@@ -22,7 +22,7 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using GooglePlac
         $geocoder = Geo::Coder::GooglePlaces->new(gl => 'ca');
         $geocoder = Geo::Coder::GooglePlaces->new(oe => 'latin1');
 
-    To specify the language of GooglePlaces's response add `language` parameter
+    To specify the language of Google's response add `language` parameter
     with a two-letter value. Note that adding that parameter does not
     guarantee that every request returns translated data.
 
@@ -44,7 +44,7 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using GooglePlac
         $location = $geocoder->geocode(location => $location);
         @location = $geocoder->geocode(location => $location);
 
-    Queries _$location_ to GooglePlaces Maps geocoding API and returns hash
+    Queries _$location_ to Google Maps geocoding API and returns hash
     reference returned back from API server. When you cann the method in
     an array context, it returns all the candidates got back, while it
     returns the 1st one in a scalar context.
@@ -75,7 +75,7 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using GooglePlac
 
 Nigel Horne <njh@bandsman.co.uk>
 
-Based on Geo::Coder::Google by Tatsuhiko Miyagawa <miyagawa@bulknews.net>
+Based on [Geo::Coder::Google](https://metacpan.org/pod/Geo::Coder::Google) by Tatsuhiko Miyagawa <miyagawa@bulknews.net>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

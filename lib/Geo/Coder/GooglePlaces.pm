@@ -18,7 +18,9 @@ See L<Geo::Coder::GooglePlaces::V3> for usage.
 
 our $VERSION = '0.02';
 
-=item new
+=head1 SUBROUTINES/METHODS
+
+=head2 new
 
 See L<Geo::Coder::GooglePlaces::V3> for usage.
 
