@@ -1,7 +1,7 @@
-[![Linux Build Status](https://travis-ci.org/nigelhorne/Geo-Coder-GooglePlaces.svg?branch=master)](https://travis-ci.org/nigelhorne/Geo-Coder-GooglePlaces)
+[![Linux Build Status](https://travis-ci.org/nigelhorne/geo-coder-googleplaces.svg?branch=master)](https://travis-ci.org/nigelhorne/geo-coder-googleplaces)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/fe74iggarbf7vg17/branch/master?svg=true)](https://ci.appveyor.com/project/nigelhorne/geo-coder-googleplaces/branch/master)
-[![Dependency Status](https://dependencyci.com/github/nigelhorne/Geo-Coder-GooglePlaces/badge)](https://dependencyci.com/github/nigelhorne/Geo-Coder-GooglePlaces)
-[![Coverage Status](https://coveralls.io/repos/github/nigelhorne/Geo-Coder-GooglePlaces/badge.svg?branch=master)](https://coveralls.io/github/nigelhorne/Geo-Coder-GooglePlaces?branch=master)
+[![Dependency Status](https://dependencyci.com/github/nigelhorne/geo-coder-googleplaces/badge)](https://dependencyci.com/github/nigelhorne/geo-coder-googleplaces)
+[![Coverage Status](https://coveralls.io/repos/github/nigelhorne/geo-coder-googleplaces/badge.svg?branch=master)](https://coveralls.io/github/nigelhorne/geo-coder-googleplaces?branch=master)
 
 # Geo::Coder::GooglePlaces
 
