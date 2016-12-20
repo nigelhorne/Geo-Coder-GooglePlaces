@@ -90,7 +90,7 @@ sub geocode {
     $uri->query_form(%query_parameters);
     my $url = $uri->as_string;
 
-    # Process Maps Premier account info
+    # Process Places Premier account info
     if ($self->{client} and $self->{key}) {
         delete $query_parameters{key};
         $query_parameters{client} = $self->{client};
@@ -105,14 +105,14 @@ sub geocode {
     my $res = $self->{ua}->get($url);
 
     if ($res->is_error) {
-        Carp::croak("Google Maps API returned error: " . $res->status_line);
+        Carp::croak("Google Places API returned error: " . $res->status_line);
     }
 
     my $json = JSON->new->utf8;
     my $data = $json->decode($res->content);
 
     unless ($data->{status} eq 'OK' || $data->{status} eq 'ZERO_RESULTS') {
-        Carp::croak(sprintf "Google Maps API returned status '%s'", $data->{status});
+        Carp::croak(sprintf "Google Places API returned status '%s'", $data->{status});
     }
 
     my @results = @{ $data->{results} || [] };
@@ -179,7 +179,7 @@ __END__
 
 =head1 NAME
 
-Geo::Coder::GooglePlaces::V3 - Google Maps Geocoding API V3
+Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
 
 =head1 SYNOPSIS
 
@@ -190,7 +190,7 @@ Geo::Coder::GooglePlaces::V3 - Google Maps Geocoding API V3
 
 =head1 DESCRIPTION
 
-Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Maps API V3.
+Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Places API V3.
 
 =head1 METHODS
 
@@ -212,7 +212,7 @@ You can also set C<gl> parameter to set country code (e.g. I<ca> for Canada).
 You can ask for a character encoding other than utf-8 by setting the I<oe>
 parameter, but this is not recommended.
 
-You can optionally use your Maps Premier Client ID, by passing your client
+You can optionally use your Places Premier Client ID, by passing your client
 code as the C<client> parameter and your private key as the C<key> parameter.
 The URL signing for Premier Client IDs requires the I<Digest::HMAC_SHA1>
 and I<MIME::Base64> modules. To test your client, set the environment
@@ -225,7 +225,7 @@ variables GMAP_CLIENT and GMAP_KEY before running v3_live.t
   $location = $geocoder->geocode(location => $location);
   @location = $geocoder->geocode(location => $location);
 
-Queries I<$location> to Google Maps geocoding API and returns hash
+Queries I<$location> to Google Places geocoding API and returns hash
 reference returned back from API server. When you cann the method in
 an array context, it returns all the candidates got back, while it
 returns the 1st one in a scalar context.

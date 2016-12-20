@@ -1,6 +1,11 @@
-# Geo::Coder::GooglePlaces::V3
+[![Linux Build Status](https://travis-ci.org/nigelhorne/Geo-Coder-GooglePlaces.svg?branch=master)](https://travis-ci.org/nigelhorne/Geo-Coder-GooglePlaces)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/fe74iggarbf7vg17/branch/master?svg=true)](https://ci.appveyor.com/project/nigelhorne/geo-coder-googleplaces/branch/master)
+[![Dependency Status](https://dependencyci.com/github/nigelhorne/Geo-Coder-GooglePlaces/badge)](https://dependencyci.com/github/nigelhorne/Geo-Coder-GooglePlaces)
+[![Coverage Status](https://coveralls.io/repos/github/nigelhorne/Geo-Coder-GooglePlaces/badge.svg?branch=master)](https://coveralls.io/github/nigelhorne/Geo-Coder-GooglePlaces?branch=master)
 
-Google Maps Geocoding API V3
+# Geo::Coder::GooglePlaces
+
+Google Places Geocoding API
 
 # SYNOPSIS
 
@@ -11,7 +16,7 @@ Google Maps Geocoding API V3
 
 # DESCRIPTION
 
-Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Maps API V3.
+Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Places API V3.
 
 # METHODS
 
@@ -31,11 +36,11 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Map
     You can ask for a character encoding other than utf-8 by setting the _oe_
     parameter, but this is not recommended.
 
-    You can optionally use your Maps Premier Client ID, by passing your client
+    You can optionally use your Places Premier Client ID, by passing your client
     code as the `client` parameter and your private key as the `key` parameter.
     The URL signing for Premier Client IDs requires the _Digest::HMAC\_SHA1_
     and _MIME::Base64_ modules. To test your client, set the environment
-    variables GMAP\_CLIENT and GMAP\_KEY before running 02\_v3\_live.t
+    variables GMAP\_CLIENT and GMAP\_KEY before running v3\_live.t
 
         GMAP_CLIENT=your_id GMAP_KEY='your_key' make test
 
@@ -44,12 +49,12 @@ Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Map
         $location = $geocoder->geocode(location => $location);
         @location = $geocoder->geocode(location => $location);
 
-    Queries _$location_ to Google Maps geocoding API and returns hash
+    Queries _$location_ to Google Places geocoding API and returns hash
     reference returned back from API server. When you cann the method in
     an array context, it returns all the candidates got back, while it
     returns the 1st one in a scalar context.
 
-    When you'd like to pass non-ascii string as a location, you should
+    When you'd like to pass non-ASCII string as a location, you should
     pass it as either UTF-8 bytes or Unicode flagged string.
 
 - reverse\_geocode
