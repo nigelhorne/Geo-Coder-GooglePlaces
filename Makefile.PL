@@ -9,8 +9,9 @@ WriteMakefile(
     'ABSTRACT_FROM' => 'lib/Geo/Coder/GooglePlaces.pm',
     'MIN_PERL_VERSION' => '5.008001',
     'PREREQ_PM' => {
-        LWP => 5.5,
+        'LWP::UserAgent' => 5.5,
         JSON => 2.27,
+        Carp => 0,
         Encode => 0,
         URI => 0,
         'HTTP::Request' => 0,

@@ -1,4 +1,4 @@
-Geo-Coder-GooglePlaces Version 0.02
+Geo-Coder-GooglePlaces Version 0.03
 
 INSTALLATION
 
@@ -33,6 +33,8 @@ You can also look for information at:
 
 LICENSE AND COPYRIGHT
 
-Copyright (C) 2010-2016 Nigel Horne
+Nigel Horne <njh@bandsman.co.uk>
+
+Based on Geo::Coder::Google by Tatsuhiko Miyagawa miyagawa@bulknews.net
 
 This program is released under the following licence: GPL

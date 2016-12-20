@@ -2,7 +2,7 @@ package Geo::Coder::GooglePlaces::V3;
 
 use strict;
 use warnings;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use Carp;
 use Encode;
@@ -26,9 +26,9 @@ sub new {
     my $client   = delete $param{client}   || '';
     my $key      = delete $param{key}      || '';
     my $components = delete $param{components};
-   
-    bless { 
-        ua => $ua, host => $host, language => $language, 
+
+    bless {
+        ua => $ua, host => $host, language => $language,
         region => $region, oe => $oe, sensor => $sensor,
         client => $client, key => $key,
         components => $components,
@@ -69,7 +69,7 @@ sub geocode {
         $param{location} = shift;
     }
 
-    my $location = $param{location} 
+    my $location = $param{location}
         or Carp::croak("Usage: geocode(location => \$location)");
 
     if (Encode::is_utf8($location)) {
@@ -119,7 +119,7 @@ sub geocode {
     wantarray ? @results : $results[0];
 }
 
-# methods below adapted from 
+# methods below adapted from
 # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.pl
 sub _decode_urlsafe_base64 {
   my ($self, $content) = @_;
@@ -216,7 +216,7 @@ You can optionally use your Maps Premier Client ID, by passing your client
 code as the C<client> parameter and your private key as the C<key> parameter.
 The URL signing for Premier Client IDs requires the I<Digest::HMAC_SHA1>
 and I<MIME::Base64> modules. To test your client, set the environment
-variables GMAP_CLIENT and GMAP_KEY before running 02_v3_live.t
+variables GMAP_CLIENT and GMAP_KEY before running v3_live.t
 
   GMAP_CLIENT=your_id GMAP_KEY='your_key' make test
 
@@ -230,7 +230,7 @@ reference returned back from API server. When you cann the method in
 an array context, it returns all the candidates got back, while it
 returns the 1st one in a scalar context.
 
-When you'd like to pass non-ascii string as a location, you should
+When you'd like to pass non-ASCII string as a location, you should
 pass it as either UTF-8 bytes or Unicode flagged string.
 
 =item reverse_geocode
