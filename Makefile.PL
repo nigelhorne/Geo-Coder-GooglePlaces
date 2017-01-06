@@ -32,8 +32,8 @@ WriteMakefile(
             },
             repository  => {
                 type => 'git',
-		url => 'https://github.com/nigelhorne/geo-coder-googleplaces.git',
-		web => 'https://github.com/nigelhorne/geo-coder-googleplaces',
+		url => 'https://github.com/nigelhorne/Geo-Coder-GooglePlaces.git',
+		web => 'https://github.com/nigelhorne/Geo-Coder-GooglePlaces',
             },
         },
     },
