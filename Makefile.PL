@@ -19,9 +19,6 @@ WriteMakefile(
     BUILD_REQUIRES => {
 	'Test::Most' => 0,
 	'Test::NoWarnings' => 0,
-    },
-    'TEST_REQUIRES' => {
-        'Test::Most' => 0,
         'Test::Number::Delta' => 0,
         'Digest::HMAC_SHA1' => 0,
         'MIME::Base64' => 0,
