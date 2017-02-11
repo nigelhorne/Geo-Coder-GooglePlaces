@@ -5,7 +5,7 @@ use Test::More;
 use Encode ();
 use Geo::Coder::GooglePlaces;
 
-if ($ENV{TEST_GEOCODER_GOOGLE_LIVE}) {
+if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
   plan tests => 14;
 } else {
   plan skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable';
@@ -20,7 +20,7 @@ if ($ENV{TEST_GEOCODER_GOOGLE_LIVE}) {
 
 SKIP: {
     skip "google.co.jp suspended geocoding JP characters", 1;
-    my $geocoder = Geo::Coder::GooglePlaces->new(apikey => $ENV{GOOGLE_MAPS_APIKEY}, host => 'maps.google.co.jp');
+    my $geocoder = Geo::Coder::GooglePlaces->new(apikey => $ENV{GMAP_KEY}, host => 'maps.google.co.jp');
     my $location = $geocoder->geocode("東京都港区赤坂2-14-5");
     delta_ok($location->{Point}->{coordinates}->[0], 139.737808);
 }
