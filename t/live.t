@@ -32,7 +32,7 @@ SKIP: {
     delta_ok($location_es->{geometry}{location}{lng}, -4.0273231);
     my $geocoder_us = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{GMAP_KEY});
     my $location_us = $geocoder_us->geocode('Toledo');
-    delta_ok($location_us->{geometry}{location}{lng}, -83.555212);
+    delta_ok($location_us->{geometry}{location}{lng}, -83.53787);
 }
 
 # URL signing
@@ -55,7 +55,8 @@ SKIP: {
 SKIP: {
     my $geocoder_utf8 = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'utf8', key => $ENV{GMAP_KEY});
     my $location_utf8 = $geocoder_utf8->geocode('Bělohorská 80, 6, Czech Republic');
-    is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, Břevnov, 169 00 Praha-Praha 6, Czech Republic');
+    # is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, Břevnov, 169 00 Praha-Praha 6, Czech Republic');
+    is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, 169 00 Praha 6-Břevnov, Czechia');
 }
 
 # Reverse Geocoding

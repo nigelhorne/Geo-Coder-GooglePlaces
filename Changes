@@ -1,4 +1,7 @@
-Revision history for CGI-Info
+Revision history for Geo-Coder-GoolePlaces
+
+0.04
+	Added the key() method
 
 0.03	Tue 20 Dec 07:35:31 EST 2016
 	More tests

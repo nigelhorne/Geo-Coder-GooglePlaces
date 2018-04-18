@@ -43,6 +43,14 @@ sub ua {
     $self->{ua};
 }
 
+sub key {
+    my $self = shift;
+    if (@_) {
+        $self->{key} = shift;
+    }
+    $self->{key};
+}
+
 sub reverse_geocode {
     my $self = shift;
 
@@ -246,11 +254,17 @@ Accessor method to get and set UserAgent object used internally. You
 can call I<env_proxy> for example, to get the proxy information from
 environment variables:
 
-  $coder->ua->env_proxy;
+  $coder->ua->env_proxy(1);
 
 You can also set your own User-Agent object:
 
-  $coder->ua( LWPx::ParanoidAgent->new );
+  $coder->ua( LWP::UserAgent::Throttled->new() );
+
+=item key
+
+Accessor method to get and set your Google API key.
+
+  print $coder->key(), "\n";
 
 =back
 
