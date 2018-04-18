@@ -228,6 +228,8 @@ variables GMAP_CLIENT and GMAP_KEY before running v3_live.t
 
   GMAP_CLIENT=your_id GMAP_KEY='your_key' make test
 
+You can get a key from https://console.developers.google.com/apis/credentials.
+
 =item geocode
 
   $location = $geocoder->geocode(location => $location);
