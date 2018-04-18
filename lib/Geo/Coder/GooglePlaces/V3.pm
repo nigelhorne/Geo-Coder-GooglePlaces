@@ -65,7 +65,7 @@ sub reverse_geocode {
         or Carp::croak("Usage: reverse_geocode(latlng => \$latlng)");
 
     return $self->geocode(location => $latlng, reverse => 1);
-};
+}
 
 sub geocode {
     my $self = shift;
