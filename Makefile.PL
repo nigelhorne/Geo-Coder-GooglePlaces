@@ -15,8 +15,7 @@ WriteMakefile(
         Encode => 0,
         URI => 0,
         'HTTP::Request' => 0,
-    },
-    BUILD_REQUIRES => {
+    }, BUILD_REQUIRES => {
 	'Test::Most' => 0,
 	'Test::NoWarnings' => 0,
         'Test::Number::Delta' => 0,
@@ -29,11 +28,11 @@ WriteMakefile(
             bugtracker  => {
                 web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Geo-Coder-GooglePlaces',
                 mailto => 'bug-Geo-Coder-GooglePlaces@rt.cpan.org',
-            },
-            repository  => {
+            }, repository  => {
                 type => 'git',
 		url => 'https://github.com/nigelhorne/Geo-Coder-GooglePlaces.git',
 		web => 'https://github.com/nigelhorne/Geo-Coder-GooglePlaces',
+		mailto => 'bug-CGI-Info@rt.cpan.org'
             },
         },
     },

@@ -13,6 +13,23 @@ use URI;
 
 my @ALLOWED_FILTERS = qw/route locality administrative_area postal_code country/;
 
+=head1 NAME
+
+Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
+
+=head1 SYNOPSIS
+
+    use Geo::Coder::GooglePlaces;
+
+    my $geocoder = Geo::Coder::GooglePlaces->new();
+    my $location = $geocoder->geocode(location => 'Hollywood and Highland, Los Angeles, CA');
+
+=head1 DESCRIPTION
+
+Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Places API V3.
+
+=cut
+
 sub new {
     my($class, %param) = @_;
 
@@ -185,21 +202,6 @@ sub _get_components_query_params {
 1;
 __END__
 
-=head1 NAME
-
-Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
-
-=head1 SYNOPSIS
-
-  use Geo::Coder::GooglePlaces;
-
-  my $geocoder = Geo::Coder::GooglePlaces->new();
-  my $location = $geocoder->geocode( location => 'Hollywood and Highland, Los Angeles, CA' );
-
-=head1 DESCRIPTION
-
-Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Places API V3.
-
 =head1 METHODS
 
 =over 4
@@ -274,7 +276,7 @@ Accessor method to get and set your Google API key.
 
 Nigel Horne <njh@bandsman.co.uk>
 
-Based on L<Geo::Coder::Google> by Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+Based on L<Geo::Coder::Google> by Tatsuhiko Miyagawa C<< <miyagawa@bulknews.net> >>
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
