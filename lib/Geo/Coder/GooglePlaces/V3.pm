@@ -28,6 +28,34 @@ Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
 
 Geo::Coder::GooglePlaces::V3 provides a geocoding functionality using Google Places API V3.
 
+=head1 SUBROUTINES/METHODS
+
+=head2 new
+
+  $geocoder = Geo::Coder::GooglePlaces->new();
+  $geocoder = Geo::Coder::GooglePlaces->new(language => 'ru');
+  $geocoder = Geo::Coder::GooglePlaces->new(gl => 'ca');
+  $geocoder = Geo::Coder::GooglePlaces->new(oe => 'latin1');
+
+To specify the language of Google's response add C<language> parameter
+with a two-letter value. Note that adding that parameter does not
+guarantee that every request returns translated data.
+
+You can also set C<gl> parameter to set country code (e.g. I<ca> for Canada).
+
+You can ask for a character encoding other than utf-8 by setting the I<oe>
+parameter, but this is not recommended.
+
+You can optionally use your Places Premier Client ID, by passing your client
+code as the C<client> parameter and your private key as the C<key> parameter.
+The URL signing for Premier Client IDs requires the I<Digest::HMAC_SHA1>
+and I<MIME::Base64> modules. To test your client, set the environment
+variables GMAP_CLIENT and GMAP_KEY before running v3_live.t
+
+  GMAP_CLIENT=your_id GMAP_KEY='your_key' make test
+
+You can get a key from https://console.developers.google.com/apis/credentials.
+
 =cut
 
 sub new {
@@ -52,37 +80,20 @@ sub new {
     }, $class;
 }
 
-sub ua {
-    my $self = shift;
-    if (@_) {
-        $self->{ua} = shift;
-    }
-    $self->{ua};
-}
+=head2 geocode
 
-sub key {
-    my $self = shift;
-    if (@_) {
-        $self->{key} = shift;
-    }
-    $self->{key};
-}
+  $location = $geocoder->geocode(location => $location);
+  @location = $geocoder->geocode(location => $location);
 
-sub reverse_geocode {
-    my $self = shift;
+Queries I<$location> to Google Places geocoding API and returns hash
+reference returned back from API server. When you cann the method in
+an array context, it returns all the candidates got back, while it
+returns the 1st one in a scalar context.
 
-    my %param;
-    if (@_ % 2 == 0) {
-        %param = @_;
-    } else {
-        $param{latlng} = shift;
-    }
+When you'd like to pass non-ASCII string as a location, you should
+pass it as either UTF-8 bytes or Unicode flagged string.
 
-    my $latlng = $param{latlng}
-        or Carp::croak("Usage: reverse_geocode(latlng => \$latlng)");
-
-    return $self->geocode(location => $latlng, reverse => 1);
-}
+=cut
 
 sub geocode {
     my $self = shift;
@@ -144,6 +155,31 @@ sub geocode {
     wantarray ? @results : $results[0];
 }
 
+=head2 reverse_geocode
+
+  $location = $geocoder->reverse_geocode(latlng => '37.778907,-122.39732');
+  @location = $geocoder->reverse_geocode(latlng => '37.778907,-122.39732');
+
+Similar to geocode except it expects a latitude/longitude parameter.
+
+=cut
+
+sub reverse_geocode {
+    my $self = shift;
+
+    my %param;
+    if (@_ % 2 == 0) {
+        %param = @_;
+    } else {
+        $param{latlng} = shift;
+    }
+
+    my $latlng = $param{latlng}
+        or Carp::croak("Usage: reverse_geocode(latlng => \$latlng)");
+
+    return $self->geocode(location => $latlng, reverse => 1);
+}
+
 # methods below adapted from
 # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.pl
 sub _decode_urlsafe_base64 {
@@ -199,60 +235,7 @@ sub _get_components_query_params {
     return join('|', @validated_components);
 }
 
-1;
-__END__
-
-=head1 METHODS
-
-=over 4
-
-=item new
-
-  $geocoder = Geo::Coder::GooglePlaces->new();
-  $geocoder = Geo::Coder::GooglePlaces->new(language => 'ru');
-  $geocoder = Geo::Coder::GooglePlaces->new(gl => 'ca');
-  $geocoder = Geo::Coder::GooglePlaces->new(oe => 'latin1');
-
-To specify the language of Google's response add C<language> parameter
-with a two-letter value. Note that adding that parameter does not
-guarantee that every request returns translated data.
-
-You can also set C<gl> parameter to set country code (e.g. I<ca> for Canada).
-
-You can ask for a character encoding other than utf-8 by setting the I<oe>
-parameter, but this is not recommended.
-
-You can optionally use your Places Premier Client ID, by passing your client
-code as the C<client> parameter and your private key as the C<key> parameter.
-The URL signing for Premier Client IDs requires the I<Digest::HMAC_SHA1>
-and I<MIME::Base64> modules. To test your client, set the environment
-variables GMAP_CLIENT and GMAP_KEY before running v3_live.t
-
-  GMAP_CLIENT=your_id GMAP_KEY='your_key' make test
-
-You can get a key from https://console.developers.google.com/apis/credentials.
-
-=item geocode
-
-  $location = $geocoder->geocode(location => $location);
-  @location = $geocoder->geocode(location => $location);
-
-Queries I<$location> to Google Places geocoding API and returns hash
-reference returned back from API server. When you cann the method in
-an array context, it returns all the candidates got back, while it
-returns the 1st one in a scalar context.
-
-When you'd like to pass non-ASCII string as a location, you should
-pass it as either UTF-8 bytes or Unicode flagged string.
-
-=item reverse_geocode
-
-  $location = $geocoder->reverse_geocode(latlng => '37.778907,-122.39732');
-  @location = $geocoder->reverse_geocode(latlng => '37.778907,-122.39732');
-
-Similar to geocode except it expects a latitude/longitude parameter.
-
-=item ua
+=head2 ua
 
 Accessor method to get and set UserAgent object used internally. You
 can call I<env_proxy> for example, to get the proxy information from
@@ -264,17 +247,38 @@ You can also set your own User-Agent object:
 
   $coder->ua( LWP::UserAgent::Throttled->new() );
 
-=item key
+=cut
+
+sub ua {
+    my $self = shift;
+    if (@_) {
+        $self->{ua} = shift;
+    }
+    $self->{ua};
+}
+
+=head2 key
 
 Accessor method to get and set your Google API key.
 
   print $coder->key(), "\n";
 
-=back
+=cut
+
+sub key {
+    my $self = shift;
+    if (@_) {
+        $self->{key} = shift;
+    }
+    $self->{key};
+}
+
+1;
+__END__
 
 =head1 AUTHOR
 
-Nigel Horne <njh@bandsman.co.uk>
+Nigel Horne C<< <njh@bandsman.co.uk> >>
 
 Based on L<Geo::Coder::Google> by Tatsuhiko Miyagawa C<< <miyagawa@bulknews.net> >>
 
@@ -283,8 +287,41 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<Geo::Coder::Yahoo>, L<http://www.google.com/apis/maps/documentation/#Geocoding_Examples>
+L<Geo::Coder::Yahoo>
 
-List of supported languages: L<http://spreadsheets.google.com/pub?key=p9pdwsai2hDMsLkXsoM05KQ&gid=1>
+=head1 SUPPORT
 
+You can find documentation for this module with the perldoc command.
+
+    perldoc Geo::Coder::GooglePlaces
+
+You can also look for information at:
+
+=over 4
+
+=item * MetaCPAN
+
+L<https://metacpan.org/release/Geo-Coder-GooglePlaces>
+
+=item * RT: CPAN's request tracker
+
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Geo-Coder-GooglePlaces>
+
+=item * CPANTS
+
+L<http://cpants.cpanauthors.org/dist/Geo-Coder-GooglePlaces>
+
+=item * CPAN Testers' Matrix
+
+L<http://matrix.cpantesters.org/?dist=Geo-Coder-GooglePlaces>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Geo-Coder-GooglePlaces>
+
+=item * CPAN Testers Dependencies
+
+L<http://deps.cpantesters.org/?module=Geo::Coder::GooglePlaces>
+
+=back
 =cut
