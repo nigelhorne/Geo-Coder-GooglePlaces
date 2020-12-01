@@ -2,7 +2,6 @@ package Geo::Coder::GooglePlaces::V3;
 
 use strict;
 use warnings;
-our $VERSION = '0.03';
 
 use Carp;
 use Encode;
@@ -16,6 +15,14 @@ my @ALLOWED_FILTERS = qw/route locality administrative_area postal_code country/
 =head1 NAME
 
 Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
+
+=head1 VERSION
+
+Version 0.04
+
+=cut
+
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 

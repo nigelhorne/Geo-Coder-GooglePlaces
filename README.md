@@ -10,6 +10,10 @@
 
 Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
 
+# VERSION
+
+Version 0.04
+
 # SYNOPSIS
 
     use Geo::Coder::GooglePlaces;
