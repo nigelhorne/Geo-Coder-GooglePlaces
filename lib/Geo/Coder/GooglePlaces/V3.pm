@@ -93,7 +93,8 @@ sub new {
   @location = $geocoder->geocode(location => $location);
 
 Queries I<$location> to Google Places geocoding API and returns hash
-reference returned back from API server. When you cann the method in
+reference returned back from API server.
+When you call the method in
 an array context, it returns all the candidates got back, while it
 returns the 1st one in a scalar context.
 
@@ -148,7 +149,7 @@ sub geocode {
     my $res = $self->{ua}->get($url);
 
     if ($res->is_error) {
-        Carp::croak("Google Places API returned error: " . $res->status_line);
+        Carp::croak("Google Places API returned error: ", $res->status_line());
     }
 
     my $json = JSON->new->utf8;

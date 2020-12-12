@@ -5,18 +5,24 @@ use Test::More;
 use Encode ();
 use Geo::Coder::GooglePlaces;
 
+my $geocoder;
+my $location;
 if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
-  plan tests => 14;
+	eval {
+		$geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{GMAP_KEY});
+		$location = $geocoder->geocode('548 4th Street, San Francisco, CA');
+	};
+	if($@) {
+		plan(skip_all => $@);
+	} else {
+		plan tests => 14;
+	}
 } else {
-  plan skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable';
+	plan(skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable');
 }
 
-{
-    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{GMAP_KEY});
-    my $location = $geocoder->geocode('548 4th Street, San Francisco, CA');
-    delta_ok($location->{geometry}{location}{lat}, 37.778907);
-    delta_ok($location->{geometry}{location}{lng}, -122.39760);
-}
+delta_ok($location->{geometry}{location}{lat}, 37.778907);
+delta_ok($location->{geometry}{location}{lng}, -122.39760);
 
 SKIP: {
     skip "google.co.jp suspended geocoding JP characters", 1;
