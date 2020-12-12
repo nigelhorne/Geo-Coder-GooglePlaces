@@ -293,6 +293,10 @@ Based on L<Geo::Coder::Google> by Tatsuhiko Miyagawa C<< <miyagawa@bulknews.net>
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
+=head1 BUGS
+
+I believe that reverse may longer work.
+
 =head1 SEE ALSO
 
 L<Geo::Coder::Yahoo>

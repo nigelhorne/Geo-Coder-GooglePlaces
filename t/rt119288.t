@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use Test::Number::Delta within => 1e-4;
+use Test::Number::Delta within => 1e-3;
 use Test::Most;
 
 use Geo::Coder::GooglePlaces;
