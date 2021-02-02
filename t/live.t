@@ -56,7 +56,7 @@ SKIP: {
     my $geocoder_utf8 = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'utf8', key => $ENV{GMAP_KEY});
     my $location_utf8 = $geocoder_utf8->geocode('Bělohorská 80, 6, Czech Republic');
     # is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, Břevnov, 169 00 Praha-Praha 6, Czech Republic');
-    is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, 169 00 Praha 6-Břevnov, Czechia');
+    is($location_utf8->{formatted_address}, 'Bělohorská 80, 169 00 Praha 6, Czechia');
 }
 
 # Reverse Geocoding
