@@ -114,7 +114,7 @@ sub geocode {
     }
 
     my $location = $param{location}
-        or Carp::croak("Usage: geocode(location => \$location)");
+        or Carp::croak('Usage: geocode(location => $location)');
 
     if (Encode::is_utf8($location)) {
         $location = Encode::encode_utf8($location);
@@ -149,7 +149,7 @@ sub geocode {
     my $res = $self->{ua}->get($url);
 
     if ($res->is_error) {
-        Carp::croak("Google Places API returned error: ", $res->status_line());
+        Carp::croak('Google Places API returned error: ', $res->status_line());
     }
 
     my $json = JSON->new->utf8;
@@ -183,7 +183,7 @@ sub reverse_geocode {
     }
 
     my $latlng = $param{latlng}
-        or Carp::croak("Usage: reverse_geocode(latlng => \$latlng)");
+        or Carp::croak('Usage: reverse_geocode(latlng => $latlng)');
 
     return $self->geocode(location => $latlng, reverse => 1);
 }

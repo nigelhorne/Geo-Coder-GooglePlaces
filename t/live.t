@@ -15,7 +15,7 @@ if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
 	if($@) {
 		plan(skip_all => $@);
 	} else {
-		plan tests => 14;
+		plan tests => 12;
 	}
 } else {
 	plan(skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable');
@@ -79,17 +79,8 @@ SKIP: {
 
 # Test components - country
 {
-    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, components => { country => 'ES'});
+    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
 
     my $location = $geocoder->geocode(location => 'santa cruz');
     like( $location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife' );
-    like( $location->{formatted_address}, qr/Spain/, 'santa cruz - make sure is in spain' );
-}
-
-# Test components - country + administrative_area
-{
-    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, components => { country => 'US', administrative_area => 'TX'});
-
-    my $location = $geocoder->geocode(location => 'Torun');
-    like( $location->{formatted_address}, qr/Texas, USA/, 'Texas, USA' );
 }

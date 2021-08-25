@@ -1,5 +1,8 @@
 Revision history for Geo-Coder-GoolePlaces
 
+0.05
+	Fix tests
+
 0.04	Tue Dec  1 08:50:35 EST 2020
 	Added the key() method
 	More tests
