@@ -7,13 +7,14 @@ use Test::Most;
 BEGIN {
 	if($ENV{AUTHOR_TESTING}) {
 		eval {
-			require Test::EOL;
+			require Test::EOF;
 		};
 		if($@) {
-			plan(skip_all => 'Test::EOL not installed');
+			plan(skip_all => 'Test::EOF not installed');
 		} else {
-			import Test::EOL;
-			all_perl_files_ok({ trailing_whitespace => 1 });
+			import Test::EOF;
+			all_perl_files_ok({ minimum_newlines => 1, maximum_newlines => 4 });
+			done_testing();
 		}
 	} else {
 		plan(skip_all => 'Author tests not required for installation');

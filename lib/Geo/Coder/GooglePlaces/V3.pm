@@ -152,8 +152,8 @@ sub geocode {
         Carp::croak('Google Places API returned error: ', $res->status_line());
     }
 
-    my $json = JSON->new->utf8;
-    my $data = $json->decode($res->content);
+    my $json = JSON->new()->utf8();
+    my $data = $json->decode($res->decoded_content());
 
     unless ($data->{status} eq 'OK' || $data->{status} eq 'ZERO_RESULTS') {
         Carp::croak(sprintf "Google Places API returned status '%s'", $data->{status});

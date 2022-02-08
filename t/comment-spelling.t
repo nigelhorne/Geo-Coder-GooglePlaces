@@ -17,11 +17,5 @@ if($ENV{AUTHOR_TESTING} ) {
 }
 
 __DATA__
-cgi
-dir
-ENV
-getpairs
-NetBSD
-paramref
-Solaris
-TODO
+filterN
+valueN

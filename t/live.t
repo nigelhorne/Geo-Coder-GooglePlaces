@@ -15,7 +15,7 @@ if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
 	if($@) {
 		plan(skip_all => $@);
 	} else {
-		plan tests => 12;
+		plan(tests => 15);
 	}
 } else {
 	plan(skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable');
@@ -79,8 +79,22 @@ SKIP: {
 
 # Test components - country
 {
-    my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
+	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
 
-    my $location = $geocoder->geocode(location => 'santa cruz');
-    like( $location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife' );
+	my $location = $geocoder->geocode(location => 'santa cruz');
+	like( $location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife' );
+}
+
+# Test RT#141181
+{
+	my $ua = new_ok('LWP::UserAgent');
+	$ua->default_header(accept_encoding => 'gzip,deflate');
+	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'GB', ua => $ua);
+	my $location = $geocoder->geocode('Brentford, London, England');
+
+	# use Data::Dumper;
+	# diag(Data::Dumper->new([$location])->Dump());
+
+	delta_ok($location->{geometry}{location}{lat}, 51.486);
+	delta_ok($location->{geometry}{location}{lng}, -0.31012);
 }
