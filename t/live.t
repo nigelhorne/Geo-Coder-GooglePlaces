@@ -95,6 +95,6 @@ SKIP: {
 	# use Data::Dumper;
 	# diag(Data::Dumper->new([$location])->Dump());
 
-	delta_ok($location->{geometry}{location}{lat}, 51.4);
-	delta_ok($location->{geometry}{location}{lng}, -0.31);
+	delta_ok($location->{geometry}{location}{lat}, 51.4, 0.01);
+	delta_ok($location->{geometry}{location}{lng}, -0.31, 0.01);
 }
