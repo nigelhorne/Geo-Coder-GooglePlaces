@@ -18,11 +18,11 @@ Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -79,7 +79,7 @@ sub new {
     my $key      = delete $param{key}      || '';
     my $components = delete $param{components};
 
-    bless {
+    return bless {
         ua => $ua, host => $host, language => $language,
         region => $region, oe => $oe, sensor => $sensor,
         client => $client, key => $key,
@@ -160,7 +160,7 @@ sub geocode {
     }
 
     my @results = @{ $data->{results} || [] };
-    wantarray ? @results : $results[0];
+    return wantarray ? @results : $results[0];
 }
 
 =head2 reverse_geocode
@@ -262,7 +262,7 @@ sub ua {
     if (@_) {
         $self->{ua} = shift;
     }
-    $self->{ua};
+    return $self->{ua};
 }
 
 =head2 key
@@ -278,7 +278,7 @@ sub key {
     if (@_) {
         $self->{key} = shift;
     }
-    $self->{key};
+    return $self->{key};
 }
 
 1;
