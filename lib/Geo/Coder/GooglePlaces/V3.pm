@@ -5,7 +5,7 @@ use warnings;
 
 use Carp;
 use Encode;
-use JSON;
+use JSON::MaybeXS;
 use HTTP::Request;
 use LWP::UserAgent;
 use URI;
@@ -152,7 +152,7 @@ sub geocode {
         Carp::croak('Google Places API returned error: ', $res->status_line());
     }
 
-    my $json = JSON->new()->utf8();
+    my $json = JSON::MaybeXS->new()->utf8();
     my $data = $json->decode($res->decoded_content());
 
     unless($data->{status} eq 'OK' || $data->{status} eq 'ZERO_RESULTS') {
