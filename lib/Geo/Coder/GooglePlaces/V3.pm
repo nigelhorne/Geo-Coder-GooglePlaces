@@ -142,8 +142,8 @@ sub geocode {
 
         my $signature = $self->_make_signature($uri);
         # signature must be last parameter in query string or you get 403's
-        $url = $uri->as_string;
-        $url .= '&signature='.$signature if $signature;
+        $url = $uri->as_string();
+        $url .= "&signature=$signature" if $signature;
     }
 
     my $res = $self->{ua}->get($url);
