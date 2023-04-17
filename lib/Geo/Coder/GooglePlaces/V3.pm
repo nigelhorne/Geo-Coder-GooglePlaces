@@ -66,18 +66,26 @@ You can get a key from L<https://console.developers.google.com/apis/credentials>
 =cut
 
 sub new {
-    my($class, %param) = @_;
+    my($class, %args) = @_;
 
-    my $ua       = delete $param{ua}       || LWP::UserAgent->new(agent => __PACKAGE__ . "/$VERSION");
-    my $host     = delete $param{host}     || 'maps.googleapis.com';
+	if(!defined($class)) {
+		# Geo::Coder::GooglePlaces::new() used rather than Geo::Coder::GooglePlaces::new()
+		$class = __PACKAGE__;
+	} elsif(ref($class)) {
+		# clone the given object
+		return bless { %{$class}, %args }, ref($class);
+	}
 
-    my $language = delete $param{language} || delete $param{hl};
-    my $region   = delete $param{region}   || delete $param{gl};
-    my $oe       = delete $param{oe}       || 'utf8';
-    my $sensor   = delete $param{sensor}   || 0;
-    my $client   = delete $param{client}   || '';
-    my $key      = delete $param{key}      || '';
-    my $components = delete $param{components};
+    my $ua       = delete $args{ua}       || LWP::UserAgent->new(agent => __PACKAGE__ . "/$VERSION");
+    my $host     = delete $args{host}     || 'maps.googleapis.com';
+
+    my $language = delete $args{language} || delete $args{hl};
+    my $region   = delete $args{region}   || delete $args{gl};
+    my $oe       = delete $args{oe}       || 'utf8';
+    my $sensor   = delete $args{sensor}   || 0;
+    my $client   = delete $args{client}   || '';
+    my $key      = delete $args{key}      || '';
+    my $components = delete $args{components};
 
     return bless {
         ua => $ua, host => $host, language => $language,
@@ -326,10 +334,6 @@ L<http://cpants.cpanauthors.org/dist/Geo-Coder-GooglePlaces>
 =item * CPAN Testers' Matrix
 
 L<http://matrix.cpantesters.org/?dist=Geo-Coder-GooglePlaces>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Geo-Coder-GooglePlaces>
 
 =item * CPAN Testers Dependencies
 
