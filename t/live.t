@@ -82,7 +82,7 @@ SKIP: {
 	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
 
 	my $location = $geocoder->geocode(location => 'santa cruz');
-	like($location->{formatted_address}, qr/Santa Cruz Palace/, 'santa cruz de tenerife');
+	like($location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife');
 }
 
 # Test RT#141181

@@ -18,11 +18,11 @@ Geo::Coder::GooglePlaces::V3 - Google Places Geocoding API V3
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 SYNOPSIS
 
@@ -234,18 +234,18 @@ sub _make_signature {
 # Google API wants the components formatted in the following way:
 # <filter1>:<value1>|<filter2>:<value2>|....|<filterN>:<valueN>
 sub _get_components_query_params {
-    my ($self, ) = @_;
+    my $self = shift;
     my $components = $self->{components};
 
     my @validated_components;
     foreach my $filter (sort keys %$components ) {
         next unless grep {$_ eq $filter} @ALLOWED_FILTERS;
-        my $value = $components->{$filter};
-        if (!defined $value) {
+        if(my $value = $components->{$filter}) {
+		# Google API expects the parameter to be passed as <filter_name>:<value>
+		push @validated_components, "$filter:$value";
+	} else {
             Carp::croak("Value not specified for filter $filter");
         }
-        # Google API expects the parameter to be passed as <filter_name>:<value>
-        push @validated_components, "$filter:$value";
     }
     return unless @validated_components;
     return join('|', @validated_components);
