@@ -327,10 +327,6 @@ L<https://metacpan.org/release/Geo-Coder-GooglePlaces>
 
 L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=Geo-Coder-GooglePlaces>
 
-=item * CPANTS
-
-L<http://cpants.cpanauthors.org/dist/Geo-Coder-GooglePlaces>
-
 =item * CPAN Testers' Matrix
 
 L<http://matrix.cpantesters.org/?dist=Geo-Coder-GooglePlaces>

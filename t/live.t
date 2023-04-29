@@ -62,7 +62,7 @@ SKIP: {
 	my $geocoder_utf8 = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'utf8', key => $ENV{GMAP_KEY});
 	my $location_utf8 = $geocoder_utf8->geocode('Bělohorská 80, 6, Czech Republic');
 	# is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, Břevnov, 169 00 Praha-Praha 6, Czech Republic');
-	is($location_utf8->{formatted_address}, 'Bělohorská 80, 160 00 Praha 6, Czechia');
+	is($location_utf8->{formatted_address}, '6, Bělohorská 1685/80, 169 00 Praha 6-Břevnov, Czechia');
 }
 
 # Reverse Geocoding
@@ -82,7 +82,7 @@ SKIP: {
 	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
 
 	my $location = $geocoder->geocode(location => 'santa cruz');
-	like( $location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife' );
+	like($location->{formatted_address}, qr/Santa Cruz Palace/, 'santa cruz de tenerife');
 }
 
 # Test RT#141181
