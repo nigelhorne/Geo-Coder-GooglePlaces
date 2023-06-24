@@ -16,13 +16,13 @@ if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
 		plan(skip_all => $@);
 	} else {
 		plan(tests => 16);
+
+		delta_ok($location->{geometry}{location}{lat}, 37.778907);
+		delta_ok($location->{geometry}{location}{lng}, -122.39760);
 	}
 } else {
 	plan(skip_all => 'Not running live tests. Set $ENV{TEST_GEOCODER_GOOGLE_LIVE} = 1 to enable');
 }
-
-delta_ok($location->{geometry}{location}{lat}, 37.778907);
-delta_ok($location->{geometry}{location}{lng}, -122.39760);
 
 SKIP: {
     skip 'google.co.jp suspended geocoding JP characters', 1;
@@ -68,6 +68,7 @@ SKIP: {
 # Reverse Geocoding
 SKIP: {
 	skip 'reverse geooding no longer seems to work', 2;
+
 	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{GMAP_KEY});
 
 	my $location = $geocoder->reverse_geocode(latlng => '31.5494486689568,-97.1467727422714');
@@ -82,7 +83,7 @@ SKIP: {
 	my $geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{'GMAP_KEY'}, region => 'ES');
 
 	my $location = $geocoder->geocode(location => 'santa cruz');
-	like($location->{formatted_address}, qr/Santa Cruz de Tenerife/, 'santa cruz de tenerife');
+	like($location->{formatted_address}, qr/Santa Cruz Palace, Pl. de la Provincia, 1, 28012 Madrid/, 'santa cruz de tenerife');
 }
 
 # Test RT#141181
