@@ -1,5 +1,14 @@
 use ExtUtils::MakeMaker;
 
+my $dist = {
+	COMPRESS => 'gzip -9f',	# Compress tarball using gzip
+	SUFFIX => 'gz',	# File suffix for tarball
+};
+
+if($^O eq 'darwin') {
+	$dist->{'TAR'} = 'gtar';
+}
+
 WriteMakefile(
     'NAME'      => 'Geo::Coder::GooglePlaces',
     # 'AUTHOR'    => 'Tatsuhiko Miyagawa <miyagawa@bulknews.net>',
@@ -16,11 +25,13 @@ WriteMakefile(
         URI => 0,
         'HTTP::Request' => 0,
     }, BUILD_REQUIRES => {
+        'Digest::HMAC_SHA1' => 0,
+        'MIME::Base64' => 0,
+	}, TEST_REQUIRES => {
 	'Test::Most' => 0,
 	'Test::NoWarnings' => 0,
         'Test::Number::Delta' => 0,
-        'Digest::HMAC_SHA1' => 0,
-        'MIME::Base64' => 0,
+	'Test::RequiresInternet' => 0
     },
     META_MERGE      => {
         'meta-spec' => { version => 2 },
@@ -37,7 +48,6 @@ WriteMakefile(
 		mailto => 'bug-CGI-Info@rt.cpan.org'
             },
         },
-    },
-    dist		=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    }, dist => $dist,
     clean		=> { FILES => 'Geo-Coder-GooglePlaces-*' },
 );

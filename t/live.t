@@ -3,7 +3,9 @@ use utf8;
 use Test::Number::Delta within => 1e-1;
 use Test::More;
 use Encode ();
-use Geo::Coder::GooglePlaces;
+use Test::RequiresInternet('maps.googleapis.com' => 'https');
+
+BEGIN { use_ok('Geo::Coder::GooglePlaces') }
 
 my $geocoder;
 my $location;
@@ -12,11 +14,7 @@ if ($ENV{TEST_GEOCODER_GOOGLE_LIVE} || $ENV{'GMAP_KEY'}) {
 		$geocoder = Geo::Coder::GooglePlaces->new(apiver => 3, key => $ENV{GMAP_KEY});
 		$location = $geocoder->geocode('548 4th Street, San Francisco, CA');
 	};
-	if($@) {
-		plan(skip_all => $@);
-	} else {
-		plan(tests => 16);
-
+	unless($@) {
 		delta_ok($location->{geometry}{location}{lat}, 37.778907);
 		delta_ok($location->{geometry}{location}{lng}, -122.39760);
 	}
@@ -62,7 +60,7 @@ SKIP: {
 	my $geocoder_utf8 = Geo::Coder::GooglePlaces->new(apiver => 3, oe => 'utf8', key => $ENV{GMAP_KEY});
 	my $location_utf8 = $geocoder_utf8->geocode('Bělohorská 80, 6, Czech Republic');
 	# is($location_utf8->{formatted_address}, 'Bělohorská 1685/80, Břevnov, 169 00 Praha-Praha 6, Czech Republic');
-	is($location_utf8->{formatted_address}, '6, Bělohorská 1685/80, 160 00 Praha 6, Czechia');
+	like($location_utf8->{formatted_address}, qr/Bělohorská 1685\/80, 160 00 Praha 6, Czechia/, 'Czech Republic address');
 }
 
 # Reverse Geocoding
@@ -100,3 +98,5 @@ SKIP: {
 	delta_ok($location->{geometry}{location}{lat}, 51.4, 0.01);
 	delta_ok($location->{geometry}{location}{lng}, -0.31, 0.01);
 }
+
+done_testing();

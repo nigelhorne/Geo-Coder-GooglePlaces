@@ -2,6 +2,8 @@ Revision history for Geo-Coder-GoolePlaces
 
 0.07
 	geocode(): croak when input is just a set of numbers
+	Use Test::RequiresInternet
+	Use gtar on OS/X
 
 0.06	Sat Apr 29 10:28:36 EDT 2023
 	More helpful error message to help to debug REQUEST_DENIED
